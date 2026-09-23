@@ -222,4 +222,6 @@ export function listenForPreview(onChange) {
     if (event.origin !== location.origin || event.source !== window.parent || event.data?.type !== 'portfolio-preview' || !isDocument(event.data.document)) return;
     onChange(event.data.document);
   });
+  // Announce readiness only after the listener exists, so the console never sends edits into the void.
+  window.parent.postMessage({ type: 'portfolio-preview-ready' }, location.origin);
 }

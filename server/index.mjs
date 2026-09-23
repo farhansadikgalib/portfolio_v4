@@ -12,7 +12,7 @@ const COOKIE = 'portfolio_admin';
 const IDLE_MS = 30 * 60 * 1000;
 const ABSOLUTE_MS = 12 * 60 * 60 * 1000;
 const MAX_UPLOAD = 8 * 1024 * 1024;
-const PUBLIC_FILES = new Set(['index.html', 'styles.css', 'app.js', 'motion.js', 'cms.js', 'farhan_resume.pdf', 'data/projects.js', 'data/default-content.json', 'data/cms-schema.js']);
+const PUBLIC_FILES = new Set(['index.html', 'styles.css', 'app.js', 'motion.js', 'cms.js', 'farhan_resume.pdf', 'data/projects.js', 'data/default-content.json']);
 const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.pdf': 'application/pdf' };
 const mediaName = value => typeof value === 'string' ? value.replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, 140) : '';
 const tokenHash = value => createHash('sha256').update(value).digest('hex');

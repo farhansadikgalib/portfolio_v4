@@ -14,6 +14,9 @@ let toastTimer;
 let previewVersion = 0;
 let mediaPicker = null;
 let previewObserver = null;
+let previewFrame = null;
+let previewTimer = 0;
+let previewSent = '';
 
 // All editable content is inserted as text or form values, never executable HTML.
 function el(tag, props = {}, ...children) {
@@ -90,7 +93,20 @@ function notify(message, error = false) {
   toastTimer = setTimeout(() => { toastElement.hidden = true; }, error ? 8000 : 4200);
 }
 function dirty() { return !!state.document && JSON.stringify(state.document) !== state.savedJSON; }
-function markChanged() { updateSaveState(); }
+function markChanged() { updateSaveState(); pushPreview(); }
+// The preview iframe loads the saved draft itself; unsaved edits are sent to it as data.
+function pushPreview(immediate = false) {
+  clearTimeout(previewTimer);
+  const send = () => {
+    if (!state.document || !previewFrame?.isConnected || !previewFrame.contentWindow) return;
+    const serialized = JSON.stringify(state.document);
+    if (serialized === previewSent) return;
+    previewSent = serialized;
+    previewFrame.contentWindow.postMessage({ type: 'portfolio-preview', document: JSON.parse(serialized) }, location.origin);
+  };
+  if (immediate) send();
+  else previewTimer = setTimeout(send, 250);
+}
 function changed(object, key, value) { object[key] = value; markChanged(); }
 function dateLabel(date) {
   if (!date) return 'Not yet';
@@ -203,7 +219,7 @@ function updateSaveState() {
   document.querySelectorAll('[data-publish-meta]').forEach(node => { node.textContent = `Last published ${dateLabel(state.publishedAt)} · Draft saved ${dateLabel(state.updatedAt)}`; });
   document.querySelectorAll('[data-preview-note]').forEach(node => {
     node.classList.toggle('dirty-preview', unsaved);
-    node.textContent = unsaved ? 'Preview shows the saved draft. Refresh preview to save and see your changes.' : 'Private preview of your saved draft. The live site changes only when you publish.';
+    node.textContent = unsaved ? 'Preview updates as you edit. Save the draft to keep these changes.' : 'Private preview of your saved draft. The live site changes only when you publish.';
   });
 }
 function updateConflictNotice() {
@@ -277,6 +293,7 @@ function navigate(tab) {
 function renderShell() {
   if (!state.session?.authenticated || !state.document) return;
   previewObserver?.disconnect();
+  previewFrame = null;
   const sidebar = el('aside', { class: 'sidebar' },
     el('div', { class: 'sidebar-brand' }, el('a', { href: '/', class: 'brand-mark', 'aria-label': 'View portfolio' }, 'fg', el('span', {}, '.')), el('div', {}, el('strong', {}, 'Portfolio Console'), el('small', {}, 'Your creative workspace'))),
     el('nav', { 'aria-label': 'Console navigation' }, tabs.map(tab => el('button', { type: 'button', class: 'nav-button', title: tabNames[tab], 'aria-label': tabNames[tab], 'aria-current': state.tab === tab ? 'page' : undefined, onClick: () => navigate(tab) }, icon(tab), el('span', {}, tabNames[tab])))),
@@ -386,7 +403,7 @@ function renderBuilder() {
       }, 'small danger section-remove'));
     }
   }
-  const previewFrame = el('iframe', { title: 'Private portfolio draft preview', src: `/?preview=1&consoleVersion=${previewVersion}`, loading: 'lazy' });
+  previewFrame = el('iframe', { title: 'Private portfolio draft preview', src: `/?preview=1&consoleVersion=${previewVersion}`, loading: 'lazy' });
   const previewStage = el('div', { class: 'preview-stage' }, previewFrame);
   const viewport = el('div', { class: 'preview-viewport', 'data-size': state.previewSize }, previewStage);
   const fitPreview = () => {
@@ -411,7 +428,7 @@ function renderBuilder() {
     segmented.querySelectorAll('button').forEach(node => node.setAttribute('aria-pressed', String(node === event.currentTarget)));
   } }, size[0].toUpperCase() + size.slice(1))));
   const preview = el('section', { class: 'panel preview-panel', 'aria-label': 'Page preview' },
-    el('div', { class: 'preview-toolbar' }, segmented, el('span', { class: 'preview-info' }, 'Draft preview'), button('Refresh preview', async event => {
+    el('div', { class: 'preview-toolbar' }, segmented, el('span', { class: 'preview-info' }, 'Live draft preview'), button('Refresh preview', async event => {
       const target = event.currentTarget;
       target.disabled = true;
       if (await saveDraft({ quiet: true })) { previewVersion += 1; viewport.querySelector('iframe').src = `/?preview=1&consoleVersion=${previewVersion}`; }
@@ -650,14 +667,22 @@ function mediaCard(item, picker = false) {
     el('span', { class: 'badge' }, item.uploaded ? 'Uploaded' : 'Original asset'),
     !picker ? el('p', { class: 'media-usage' }, usage.length ? `Used in ${usage.length} place${usage.length === 1 ? '' : 's'}` : localMediaUsage(item.src) ? 'Used in unsaved draft' : 'Not currently used') : null);
   if (picker) meta.append(button('Use image', () => chooseMedia(item.src), 'small'));
-  else if (item.uploaded) meta.append(button('Delete image', async () => {
+  else if (item.uploaded) meta.append(el('div', { class: 'button-row' }, button('Rename', async () => {
+    const name = prompt('Name this image', item.name);
+    if (name === null) return;
+    if (!name.trim()) return notify('Give the image a name.', true);
+    try {
+      await api(`/api/admin/media/${encodeURIComponent(item.id)}`, { method: 'PUT', body: { name: name.trim() } });
+      await loadMedia(); renderShell(); notify('Image renamed.');
+    } catch (error) { notify(error.message, true); }
+  }, 'small'), button('Delete image', async () => {
     if (localMediaUsage(item.src)) return notify('Remove this image from the page and projects, then save and publish before deleting it.', true);
     if (!confirm(`Permanently delete “${item.name}” from the media library?`)) return;
     try {
       await api(`/api/admin/media/${encodeURIComponent(item.id)}`, { method: 'DELETE' });
       await loadMedia(); renderShell(); notify('Image removed from the media library.');
     } catch (error) { notify(error.message, true); }
-  }, 'small danger', { disabled: used.length > 0, title: used.length ? 'Remove references from draft and published content before deleting this image.' : 'Delete unused uploaded image' }));
+  }, 'small danger', { disabled: used.length > 0, title: used.length ? 'Remove references from draft and published content before deleting this image.' : 'Delete unused uploaded image' })));
   return el('article', { class: `media-card${picker ? ' pickable' : ''}` }, mediaImage, meta);
 }
 function mediaBrowser(picker = false) {
@@ -753,6 +778,11 @@ async function initialize() {
 window.addEventListener('beforeunload', event => { if (dirty()) { event.preventDefault(); event.returnValue = ''; } });
 window.addEventListener('keydown', event => {
   if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 's' && state.session?.authenticated) { event.preventDefault(); saveDraft(); }
+});
+window.addEventListener('message', event => {
+  if (event.origin !== location.origin || event.data?.type !== 'portfolio-preview-ready' || !previewFrame || event.source !== previewFrame.contentWindow) return;
+  previewSent = state.savedJSON;
+  if (dirty()) pushPreview(true);
 });
 window.addEventListener('hashchange', () => { const tab = location.hash.slice(1); if (tabs.includes(tab) && state.session?.authenticated) { state.tab = tab; renderShell(); } });
 initialize();

@@ -21,10 +21,10 @@ Use the Node server for the console and managed portfolio. VS Code Live Server o
 - **Page builder:** move sections with drag and drop or the Move up/Move down controls, hide sections, adjust spacing, and add text, image, or call-to-action sections. Built-in sections can be hidden and reordered; their original layout remains available.
 - **Content:** edit site/contact settings, or choose a section and edit its text, links, and images. Text fields are plain text, keeping the site's markup safe and its typography consistent.
 - **Projects:** add, edit, or remove projects; choose featured apps; update descriptions, responsibilities, links, icons, and screenshot galleries.
-- **Media:** upload PNG, JPEG, or WebP images, choose existing images, and delete unused uploads. Uploaded images are decoded and converted to WebP. The upload limit is 8 MiB. Bundled original assets remain available and cannot be deleted from disk through the console.
+- **Media:** upload PNG, JPEG, or WebP images, choose existing images, rename uploads, and delete unused uploads. Uploaded images are decoded and converted to WebP. The upload limit is 8 MiB. Bundled original assets remain available and cannot be deleted from disk through the console.
 - **Account:** change your login password and manage unpublished drafts.
 
-**Save draft** stores your work without changing the public site. **Preview** shows the saved draft in an authenticated preview. **Publish** makes the saved draft public. **Discard draft** restores the last published content. Unsaved browser edits must be saved before leaving the console.
+The page builder preview updates as you type, so you can see unsaved edits in place. **Save draft** stores your work without changing the public site. **Refresh preview** saves the draft and reloads the authenticated preview. **Publish** makes the saved draft public. **Discard draft** restores the last published content. Unsaved browser edits must be saved before leaving the console.
 
 To replace a hero image, select an image from the media picker or upload one. Choose **Contain** to show the complete image or **Cover** to fill the frame. The original supplied screenshots use a special crop that remains available through **Original**. Removing an image from content does not delete the underlying media file.
 
