@@ -1,0 +1,25 @@
+{
+  "name": "farhan-sadik-galib-portfolio",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A cinematic portfolio with a protected page builder, content console, and media library.",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs --dist",
+    "start": "node scripts/serve.mjs --dist",
+    "admin:setup": "node scripts/admin-setup.mjs",
+    "check": "node --check app.js && node --check cms.js && node --check motion.js && node --check admin/admin.js && node --check server/index.mjs && node --check server/schema.mjs && node scripts/check.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "sharp": "^0.35.4"
+  },
+  "devDependencies": {
+    "cheerio": "^1.2.0"
+  }
+}

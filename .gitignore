@@ -1,0 +1,9 @@
+dist/
+node_modules/
+.DS_Store
+tmp/
+.cms-data/
+.env
+.env.*
+!.env.example
+coverage/
