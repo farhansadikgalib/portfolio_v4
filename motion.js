@@ -41,6 +41,7 @@ export function initCinema() {
   rememberStyle(root, '--page-progress');
   rememberStyle(progressBar, 'transform');
   rememberClass(body, 'cinema-ready');
+  rememberClass(body, 'showcase-pinned');
   projectButtons.forEach(button => rememberAttribute(button, 'aria-pressed'));
 
   const scenes = [...document.querySelectorAll('[data-cinema]')].filter(element => !element.closest('[hidden]')).map(element => {
@@ -162,6 +163,8 @@ export function initCinema() {
         const index = Math.min(scene.chapters.length - 1, Math.floor(scaled));
         const chapterProgress = (progress === 1 ? 1 : scaled - index).toFixed(5);
         setChapter(scene, index);
+        // While the stage is pinned, the project selector takes the app bar's place.
+        body.classList.toggle('showcase-pinned', progress > 0 && progress < 1);
         if (scene.lastChapterProgress !== chapterProgress) {
           scene.element.style.setProperty('--chapter-progress', chapterProgress);
           scene.lastChapterProgress = chapterProgress;
@@ -198,6 +201,7 @@ export function initCinema() {
     needsMeasure = true;
     lastPageProgress = '';
     body.classList.remove('cinema-ready');
+    body.classList.remove('showcase-pinned');
 
     for (const scene of scenes) {
       scene.lastProgress = '';

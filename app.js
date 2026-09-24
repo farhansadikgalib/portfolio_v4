@@ -169,23 +169,56 @@ function openProject(id) {
 let activeCategory = 'All';
 let searchTerm = '';
 
+const statusLabels = { available: 'On stores', 'coming-soon': 'Coming soon', unverified: 'Portfolio' };
+
+function archiveMeta() {
+  const categories = new Set(projects.map(project => project.category).filter(Boolean)).size;
+  const live = projects.filter(project => project.linkStatus === 'available').length;
+  const featured = projects.filter(project => project.featured).length;
+  return [
+    `${projects.length} ${projects.length === 1 ? 'project' : 'projects'}`,
+    categories ? `${categories} ${categories === 1 ? 'category' : 'categories'}` : '',
+    live ? `${live} on public stores` : '',
+    featured ? `${featured} featured` : '',
+  ].filter(Boolean).join(' · ');
+}
+
 function renderFilters() {
-  const filters = ['All', ...new Set(projects.map(project => project.category).filter(Boolean))];
-  document.querySelector('#archive-filters').innerHTML = filters.map(category => `<button class="filter-button" data-category="${escapeHTML(category)}" aria-pressed="${category === activeCategory}">${escapeHTML(category)}</button>`).join('');
+  const counts = new Map();
+  for (const project of projects) if (project.category) counts.set(project.category, (counts.get(project.category) || 0) + 1);
+  const filters = [['All', projects.length], ...counts];
+  document.querySelector('#archive-filters').innerHTML = filters.map(([category, count]) => `<button class="filter-button" data-category="${escapeHTML(category)}" aria-pressed="${category === activeCategory}">${escapeHTML(category)}<span>${count}</span></button>`).join('');
+  document.querySelector('#archive-meta').textContent = archiveMeta();
+}
+
+// The collection reads as a numbered index: identity, one line of context, category, platforms, and store status.
+function archiveRow(project, position) {
+  const category = project.category === 'Other' ? 'Project' : project.category;
+  const platforms = platformNames(project);
+  const status = statusLabels[project.linkStatus] ? project.linkStatus : 'unverified';
+  const preview = project.screenshots[0] ? ` data-preview="${escapeHTML(project.screenshots[0])}"` : '';
+  const summary = [category, ...platforms, status === 'unverified' ? '' : statusLabels[status]].filter(Boolean).join(' · ');
+  return `<li style="--i:${position}"><button class="archive-row" data-project="${escapeHTML(project.id)}"${preview} aria-label="View ${escapeHTML(project.name)} project">
+    <span class="archive-row-number" aria-hidden="true">${String(projects.indexOf(project) + 1).padStart(2, '0')}</span>
+    <span class="archive-row-media">${iconHTML(project)}</span>
+    <span class="archive-row-body"><span class="archive-row-title">${escapeHTML(project.name)}${project.featured ? '<i class="archive-row-flag">Featured</i>' : ''}</span><span class="archive-row-description">${escapeHTML(project.description || 'From the mobile project collection.')}</span><span class="archive-row-sub">${escapeHTML(summary)}</span></span>
+    <span class="archive-row-category">${escapeHTML(category)}</span>
+    <span class="archive-row-platforms">${platforms.map(name => `<span>${escapeHTML(name)}</span>`).join('')}</span>
+    <span class="archive-row-status ${status}">${statusLabels[status]}</span>
+    <span class="archive-row-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+  </button></li>`;
 }
 
 function renderArchive() {
   const filtered = projects.filter(project => (activeCategory === 'All' || project.category === activeCategory) && `${project.name} ${project.category} ${project.description}`.toLowerCase().includes(searchTerm));
   document.querySelector('#results-count').textContent = `${filtered.length} of ${projects.length} projects`;
-  document.querySelector('#archive-grid').innerHTML = filtered.length ? filtered.map(project => `<button class="archive-card" data-project="${escapeHTML(project.id)}" aria-label="View ${escapeHTML(project.name)} project">
-    ${iconHTML(project)}<h3>${escapeHTML(project.name)}</h3><p>${escapeHTML(project.description || 'From the mobile project collection.')}</p>
-    <span class="archive-card-bottom">${project.linkStatus === 'coming-soon' ? 'Coming soon' : project.linkStatus === 'available' ? escapeHTML(project.category === 'Other' ? 'Project' : project.category) : 'Portfolio project'}</span>
-  </button>`).join('') : '<p class="empty-state">No projects match that search. Try another name or category.</p>';
+  document.querySelector('#archive-grid').innerHTML = filtered.length ? filtered.map(archiveRow).join('') : '<li class="empty-state">No projects match that search. Try another name or category.</li>';
+  hidePreview();
 }
 
 document.addEventListener('click', event => {
   const projectButton = event.target.closest('[data-project]');
-  if (projectButton) openProject(projectButton.dataset.project);
+  if (projectButton) { hidePreview(); openProject(projectButton.dataset.project); }
   if (event.target.closest('[data-open-archive]')) {
     activeCategory = 'All';
     searchTerm = '';
@@ -207,6 +240,48 @@ document.querySelector('#project-search').addEventListener('input', event => {
   searchTerm = event.target.value.trim().toLowerCase();
   renderArchive();
 });
+
+// A screenshot preview drifts beside the pointer over indexed projects that have store imagery (fine pointers only).
+const archivePreview = document.querySelector('#archive-preview');
+const archivePreviewImage = archivePreview.querySelector('img');
+const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+let previewRow = null;
+let previewGoal = { x: 0, y: 0 };
+let previewPosition = { x: 0, y: 0 };
+let previewFrame = 0;
+function hidePreview() {
+  previewRow = null;
+  archivePreview.classList.remove('visible');
+}
+function placePreview() {
+  const ease = motionPreference.matches ? 1 : 0.16;
+  previewPosition.x += (previewGoal.x - previewPosition.x) * ease;
+  previewPosition.y += (previewGoal.y - previewPosition.y) * ease;
+  archivePreview.style.transform = `translate3d(${previewPosition.x.toFixed(1)}px, ${previewPosition.y.toFixed(1)}px, 0)`;
+  const settled = Math.abs(previewGoal.x - previewPosition.x) < 0.3 && Math.abs(previewGoal.y - previewPosition.y) < 0.3;
+  previewFrame = settled ? 0 : requestAnimationFrame(placePreview);
+}
+archiveDialog.addEventListener('pointermove', event => {
+  if (!finePointer.matches) return;
+  const row = event.target.closest('.archive-row[data-preview]');
+  if (!row) { if (previewRow) hidePreview(); return; }
+  const width = archivePreview.offsetWidth || 184;
+  const height = archivePreview.offsetHeight || 360;
+  const rowRect = row.getBoundingClientRect();
+  // Stay to the right of the name and description columns so the text being read is never covered.
+  const x = Math.max(event.clientX + 28, rowRect.left + rowRect.width * 0.56);
+  previewGoal = { x: Math.min(x, innerWidth - width - 16), y: Math.min(Math.max(event.clientY - height * 0.45, 16), innerHeight - height - 16) };
+  if (row !== previewRow) {
+    if (!previewRow) previewPosition = { ...previewGoal };
+    previewRow = row;
+    archivePreviewImage.src = row.dataset.preview;
+    archivePreview.classList.add('visible');
+  }
+  if (!previewFrame) previewFrame = requestAnimationFrame(placePreview);
+});
+archiveDialog.addEventListener('pointerleave', hidePreview);
+archiveDialog.addEventListener('scroll', hidePreview, { passive: true });
+archiveDialog.addEventListener('close', hidePreview);
 
 for (const dialog of [projectDialog, archiveDialog]) {
   dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());

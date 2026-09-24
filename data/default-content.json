@@ -147,13 +147,6 @@
       "value": "iOS & Android"
     },
     {
-      "id": "home-text-17",
-      "section": "home",
-      "label": "Text · ACI ECOLINK",
-      "type": "text",
-      "value": "ACI ECOLINK"
-    },
-    {
       "id": "home-text-20",
       "section": "home",
       "label": "Text · Based in Dhaka, Bangladesh",
@@ -173,27 +166,6 @@
       "label": "Text · Available for hire",
       "type": "text",
       "value": "Available for hire"
-    },
-    {
-      "id": "home-text-23",
-      "section": "home",
-      "label": "Text · Currently",
-      "type": "text",
-      "value": "Currently"
-    },
-    {
-      "id": "home-text-24",
-      "section": "home",
-      "label": "Text · Senior Mobile Apps Developer",
-      "type": "text",
-      "value": "Senior Mobile Apps Developer"
-    },
-    {
-      "id": "home-text-33",
-      "section": "home",
-      "label": "Text · Current company",
-      "type": "text",
-      "value": "ACI Limited"
     },
     {
       "id": "home-text-27",
@@ -226,16 +198,51 @@
     {
       "id": "home-text-31",
       "section": "home",
-      "label": "Text · Featured screens",
+      "label": "Text · Find me on",
       "type": "text",
-      "value": "Featured screens"
+      "value": "Find me on"
     },
     {
       "id": "home-text-32",
       "section": "home",
-      "label": "Text · Service requests, product catalogue, and",
+      "label": "Label · GitHub",
       "type": "text",
-      "value": "Service requests, product catalogue, and warranty tracking."
+      "value": "GitHub"
+    },
+    {
+      "id": "home-text-33",
+      "section": "home",
+      "label": "Label · LinkedIn",
+      "type": "text",
+      "value": "LinkedIn"
+    },
+    {
+      "id": "home-text-34",
+      "section": "home",
+      "label": "Label · Medium",
+      "type": "text",
+      "value": "Medium"
+    },
+    {
+      "id": "home-text-35",
+      "section": "home",
+      "label": "Label · pub.dev",
+      "type": "text",
+      "value": "pub.dev"
+    },
+    {
+      "id": "home-link-1",
+      "section": "home",
+      "label": "Link · pub.dev publisher page",
+      "type": "url",
+      "value": "https://pub.dev/publishers/farhansadikgalib.com/packages"
+    },
+    {
+      "id": "home-text-36",
+      "section": "home",
+      "label": "Label · Email",
+      "type": "text",
+      "value": "Email"
     },
     {
       "id": "home-image-1",

@@ -2,12 +2,12 @@
 // small arrow follows the mouse on a spring, turns toward its direction of travel, stretches a little
 // at speed, and takes the accent colour over interactive elements. It lives in the top layer as a
 // manual popover so native dialogs cannot cover it. Touch, reduced motion, and browsers without the
-// popover API keep the ordinary cursor (the stylesheet still supplies the static arrow there).
+// popover API keep the ordinary cursor.
 const fineQuery = matchMedia('(hover: hover) and (pointer: fine)');
 const motionQuery = matchMedia('(prefers-reduced-motion: reduce)');
 const INTERACTIVE = 'a, button, [role="button"], [data-cursor], input, textarea, select, label, summary';
-const SHAPE = 'M3.4 2.1 18.2 14.4 10.9 16.2 4.5 20.6Z';
-const TIP = { x: 3.7, y: 2.3 }; // Arrow tip in rendered pixels; it sits exactly under the pointer.
+const SHAPE = 'M2.5 2 L20.5 11.5 L10 13.2 L5 22 Z'; // Same arrow as v2.farhansadikgalib.com.
+const TIP = { x: 3.18, y: 2.5 }; // Arrow tip in rendered pixels; it sits exactly under the pointer.
 
 function spring(initial, stiffness, damping, mass) {
   const state = { value: initial, target: initial, velocity: 0 };
@@ -26,7 +26,7 @@ const root = document.createElement('div');
 root.className = 'site-cursor';
 root.setAttribute('aria-hidden', 'true');
 root.setAttribute('popover', 'manual');
-root.innerHTML = `<svg width="24" height="26" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="${SHAPE}" stroke-linejoin="round" stroke-linecap="round"/></svg>`; // Constant markup only.
+root.innerHTML = `<svg width="28" height="30" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="${SHAPE}" stroke-linejoin="round" stroke-linecap="round"/></svg>`; // Constant markup only.
 const svg = root.firstElementChild;
 const x = spring(-100, 320, 30, 0.7);
 const y = spring(-100, 320, 30, 0.7);

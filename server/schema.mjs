@@ -1,6 +1,6 @@
 // Shared trust boundary: only known content shapes and safe destinations reach disk.
 const BUILTINS = new Set(['home','work-intro','work','approach','about','craft','experience','contact']);
-const RESERVED = new Set(['main','year','mobile-nav','hero-title','work-title','about-title','craft-title','experience-title','contact-title','featured-projects','project-dialog','project-detail','archive-dialog','archive-title','project-search','archive-filters','results-count','archive-grid','dialog-title']);
+const RESERVED = new Set(['main','year','mobile-nav','hero-title','work-title','about-title','craft-title','experience-title','contact-title','featured-projects','project-dialog','project-detail','archive-dialog','archive-title','archive-meta','archive-preview','project-search','archive-filters','results-count','archive-grid','dialog-title']);
 const STATUS = ['available','unverified','coming-soon'];
 function invalid(message) { const error = new Error(message); error.status = 400; error.statusCode = 400; throw error; }
 function object(value, label) { if (!value || typeof value !== 'object' || Array.isArray(value)) invalid(`${label} must be an object.`); return value; }
