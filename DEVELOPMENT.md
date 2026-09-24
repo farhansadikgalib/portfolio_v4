@@ -22,7 +22,7 @@ npm run build
 npm run preview
 ```
 
-The build copies browser assets to `dist/`. Run `npm start` to serve them with the authenticated backend. The CMS requires persistent writable storage and an HTTPS origin in production; it cannot run on static hosting alone. The contact CTA opens the visitor's email client. There are no external fonts, analytics, or client API keys.
+The build copies browser assets to `dist/`. Run `npm start` to serve them with the authenticated backend. The CMS requires persistent writable storage and an HTTPS origin in production; it cannot run on static hosting alone. The contact CTA opens the visitor's email client. The only bundled font is a self-hosted Latin subset of Roboto (SIL Open Font License, fonts.google.com/specimen/Roboto) used for the opening name; there are no external font downloads, analytics, or client API keys.
 
 ## Where to edit
 
@@ -35,7 +35,8 @@ The build copies browser assets to `dist/`. Run `npm start` to serve them with t
 | `data/default-content.json` | Seed content used only before CMS storage is initialized and as a static fallback |
 | `data/projects.js` | All 33 apps, verified descriptions, store links, availability, icons, screenshots, documented contributions |
 | `app.js` | Featured project presentation copy, dialog rendering, filtering, mobile menu, clipboard, one-time reveals |
-| `motion.js` | Scroll progress, cinematic stage direction, project switching, word lighting, accessible static fallbacks |
+| `motion.js` | Scroll progress, cinematic stage direction, the opening’s pointer-reactive light rig, project switching, word lighting, accessible static fallbacks |
+| `cursor.js` | Travelling pointer: spring follow, direction-aware rotation, speed stretch, accent on hover; off for touch, reduced motion, and browsers without popovers |
 | `styles.css` | Design tokens, typography, device frames, glass surfaces, layouts, responsive and reduced-motion rules |
 | `assets/projects/` | Optimized local WebP assets from the supplied README |
 | `assets/projects/sources.json` | Original image URLs, dimensions, local filenames, and optimization provenance |
@@ -58,11 +59,12 @@ Store data is a snapshot from the supplied directory, dated 21 September 2026. `
 - Project selectors jump directly to the corresponding point in the showcase. The header keeps the full project collection, résumé, and contact within reach.
 - Inactive desktop project panels are inert and hidden from accessibility APIs. Their controls cannot receive keyboard focus. The active selector exposes `aria-pressed`.
 - At widths of 760px or less, heights of 700px or less, or when reduced motion is preferred, the chapters return to normal document flow. All projects become accessible together; the selector scrolls to each project normally.
-- `prefers-reduced-motion: reduce` disables entrance animation, parallax, smooth scrolling, and transitions. Changes to the preference are handled without a reload, and hidden project state is removed immediately.
+- The opening’s lighting (cone spotlight, crossing beams, fills, halo, grain, vignette) reacts to a fine pointer only; it never moves the text or devices out of place, and it stays centred on touch devices.
+- `prefers-reduced-motion: reduce` disables entrance animation, parallax, the opening’s pointer light and floating devices, smooth scrolling, and transitions. Changes to the preference are handled without a reload, and hidden project state is removed immediately.
 - Ordinary page content remains visible when JavaScript is disabled, including a fallback set of featured store links. The searchable collection and project dialogs require JavaScript.
 - All imagery is local; below-the-fold imagery is lazy-loaded. Hero imagery has fixed device dimensions, avoiding layout shifts.
 
-Hero device frames are CSS, containing clean, unoverlaid interface regions from the supplied ACI ECOLINK and ACI Quiz artwork. MedEx also uses genuine interface crops. Full original store artwork remains available in each project gallery. No app UI, client logo, headshot, or product metrics were generated.
+The opening keeps the device stage centred and organises the rest around it: lead copy (headline, summary, actions) top-left, the proof stack (years, apps shipped, platforms) top-right, a “Currently” card bottom-left, and the screen caption bottom-right; the name is a small signature line in the topline. Tablets stack the lead and proof above the stage. The stage holds three CSS device frames showing ACI ECOLINK (catalogue, dashboard, service request), each containing clean, unoverlaid interface regions from the store artwork. On desktop the frames bleed past the bottom of the sticky stage and rise as the visitor scrolls; on phones and with reduced motion they sit fully in view. MedEx also uses genuine interface crops. Full original store artwork remains available in each project gallery. No app UI, client logo, headshot, or product metrics were generated.
 
 ## Verification performed
 

@@ -100,9 +100,6 @@ function applyFields(fields) {
 
 function applySettings(settings = {}) {
   if (typeof settings.name === 'string') {
-    const wordmark = document.querySelector('.site-header .wordmark');
-    wordmark?.querySelector('small')?.replaceChildren(document.createTextNode(settings.name));
-    wordmark?.setAttribute('aria-label', `${settings.name}, home`);
     const year = document.querySelector('#year');
     if (year?.parentElement.closest('.site-footer')) {
       while (year.nextSibling) year.nextSibling.remove();
@@ -194,7 +191,7 @@ function applySections(sections, projects) {
     const currentHref = anchor.getAttribute('href') ?? '';
     const target = currentHref.startsWith('#') ? document.getElementById(currentHref.slice(1)) : null;
     const hidden = !target || target.hidden || !!target.closest('section[hidden]');
-    if (hidden && originalHref === '#home' && (anchor.classList.contains('wordmark') || anchor.closest('.site-footer'))) {
+    if (hidden && originalHref === '#home' && anchor.closest('.site-footer')) {
       anchor.href = visible[0]?.id ? `#${visible[0].id}` : '#main';
       anchor.hidden = false;
     } else {

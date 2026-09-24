@@ -1,5 +1,6 @@
+import './cursor.js';
 import { projects as originalProjects } from './data/projects.js';
-import { initCinema } from './motion.js';
+import { initCinema, initHeroPointer } from './motion.js';
 import { applyContent, listenForPreview, loadContent, safeMedia, safeUrl } from './cms.js';
 
 let cmsContent = await loadContent();
@@ -25,6 +26,12 @@ const fallbackStories = {
     headline: 'Every ride.<br>More connected.',
     description: 'A companion for the Yamaha community. Keeping service, warranty, and the next adventure just a few taps away.',
     features: ['Digital warranty', 'Service booking', 'Rider community'],
+    preview: [1, 2],
+  },
+  prottoyon: {
+    headline: 'Every certificate.<br>One address.',
+    description: 'A digital front door to local-government certificates in Bangladesh. Apply online, verify your identity, pay, and receive approved certificates in one place.',
+    features: ['Online applications', 'Identity verification', 'Certificate issuance'],
     preview: [1, 2],
   },
   medex: {
@@ -102,6 +109,7 @@ function renderFeatured() {
         ${story.headline ? `<p class="scene-headline">${escapeHTML(story.headline)}</p>` : ''}
         ${story.description ? `<p class="scene-description">${escapeHTML(story.description)}</p>` : ''}
         ${story.features.length ? `<div class="project-features">${story.features.map(feature => `<span>${escapeHTML(feature)}</span>`).join('')}</div>` : ''}
+        ${project.downloads ? `<p class="scene-downloads" aria-label="${escapeHTML(project.downloads)} downloads on ${escapeHTML(project.downloadsSource || 'app stores')}"><strong>${escapeHTML(project.downloads)}</strong><span>downloads · ${escapeHTML(project.downloadsSource || 'App stores')}</span></p>` : ''}
         <div class="project-actions"><button class="button button-primary" data-project="${escapeHTML(project.id)}" aria-label="Explore ${escapeHTML(project.name)} project">Inside the project</button><div class="store-shortcuts">${storeShortcuts(project)}</div></div>
         ${project.role ? `<p class="scene-meta">My contribution · ${escapeHTML(project.role)}</p>` : ''}
       </div>
@@ -290,8 +298,10 @@ configureReveals();
 motionPreference.addEventListener('change', configureReveals);
 
 let disposeCinema = initCinema();
+let disposeHeroPointer = initHeroPointer();
 listenForPreview(content => {
   disposeCinema?.();
+  disposeHeroPointer?.();
   cmsContent = content;
   projects = normalizeProjects(content.projects);
   applyContent(content);
@@ -300,4 +310,5 @@ listenForPreview(content => {
   if (projectDialog.open) projectDialog.close();
   configureReveals();
   disposeCinema = initCinema();
+  disposeHeroPointer = initHeroPointer();
 });

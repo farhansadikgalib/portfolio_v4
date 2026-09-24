@@ -36,6 +36,34 @@ export const projects = [
     "sourceDate": "21 September 2026"
   },
   {
+    "id": "medex",
+    "name": "MedEx",
+    "category": "Healthcare",
+    "description": "Bangladesh medicine index with brand and generic search, dosage, pharmacology, contraindications, and bilingual content.",
+    "descriptionVerified": true,
+    "featured": true,
+    "icon": "assets/projects/medex-icon.webp",
+    "screenshots": [
+      "assets/projects/medex-screen-1.webp",
+      "assets/projects/medex-screen-2.webp",
+      "assets/projects/medex-screen-3.webp"
+    ],
+    "links": {
+      "play": "https://play.google.com/store/apps/details?id=com.medex.bd.medex",
+      "appStore": "",
+      "aci": ""
+    },
+    "linkStatus": "available",
+    "linkStatuses": {
+      "play": "available"
+    },
+    "downloads": "500K+",
+    "downloadsSource": "Google Play",
+    "sourceDate": "21 September 2026",
+    "role": "Medicine-reference app engineering",
+    "roleSource": "farhan_resume.pdf"
+  },
+  {
     "id": "firsttrip",
     "name": "FirstTrip",
     "category": "Travel",
@@ -274,7 +302,7 @@ export const projects = [
     "category": "Public services",
     "description": "Bangladesh certificate-service app for applications, verification, payment, approval, and local-government certificate issuance.",
     "descriptionVerified": true,
-    "featured": false,
+    "featured": true,
     "icon": "assets/projects/prottoyon-icon.webp",
     "screenshots": [
       "assets/projects/prottoyon-screen-1.webp",
@@ -294,34 +322,6 @@ export const projects = [
     "downloadsSource": "Google Play",
     "sourceDate": "21 September 2026",
     "role": "Contributed to government certification app",
-    "roleSource": "farhan_resume.pdf"
-  },
-  {
-    "id": "medex",
-    "name": "MedEx",
-    "category": "Healthcare",
-    "description": "Bangladesh medicine index with brand and generic search, dosage, pharmacology, contraindications, and bilingual content.",
-    "descriptionVerified": true,
-    "featured": true,
-    "icon": "assets/projects/medex-icon.webp",
-    "screenshots": [
-      "assets/projects/medex-screen-1.webp",
-      "assets/projects/medex-screen-2.webp",
-      "assets/projects/medex-screen-3.webp"
-    ],
-    "links": {
-      "play": "https://play.google.com/store/apps/details?id=com.medex.bd.medex",
-      "appStore": "",
-      "aci": ""
-    },
-    "linkStatus": "available",
-    "linkStatuses": {
-      "play": "available"
-    },
-    "downloads": "500K+",
-    "downloadsSource": "Google Play",
-    "sourceDate": "21 September 2026",
-    "role": "Medicine-reference app engineering",
     "roleSource": "farhan_resume.pdf"
   },
   {

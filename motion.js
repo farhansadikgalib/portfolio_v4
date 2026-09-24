@@ -306,3 +306,58 @@ export function initCinema() {
   disposePrevious = cleanup;
   return cleanup;
 }
+
+// Pointer light for the opening. A fine pointer nudges the light rig through
+// --px/--py on the stage (each in -1..1). Content never follows the pointer,
+// and reduced motion or a coarse pointer leaves the rig centred.
+export function initHeroPointer() {
+  const stage = document.querySelector('.hero-stage');
+  if (!stage) return () => {};
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  let frame = 0;
+  let x = 0;
+  let y = 0;
+  let visible = true;
+  const active = () => visible && finePointer.matches && !reducedMotion.matches;
+
+  function paint() {
+    frame = 0;
+    stage.style.setProperty('--px', x.toFixed(3));
+    stage.style.setProperty('--py', y.toFixed(3));
+  }
+  function schedule() {
+    if (!frame) frame = requestAnimationFrame(paint);
+  }
+  function onMove(event) {
+    if (!active()) return;
+    x = clamp(event.clientX / Math.max(1, innerWidth)) * 2 - 1;
+    y = clamp(event.clientY / Math.max(1, innerHeight)) * 2 - 1;
+    schedule();
+  }
+  function reset() {
+    x = 0;
+    y = 0;
+    schedule();
+  }
+  const observer = 'IntersectionObserver' in window
+    ? new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; if (!visible) reset(); })
+    : null;
+  observer?.observe(stage);
+  window.addEventListener('pointermove', onMove, { passive: true });
+  document.documentElement.addEventListener('pointerleave', reset);
+  finePointer.addEventListener('change', reset);
+  reducedMotion.addEventListener('change', reset);
+
+  return () => {
+    cancelAnimationFrame(frame);
+    frame = 0;
+    observer?.disconnect();
+    window.removeEventListener('pointermove', onMove);
+    document.documentElement.removeEventListener('pointerleave', reset);
+    finePointer.removeEventListener('change', reset);
+    reducedMotion.removeEventListener('change', reset);
+    stage.style.removeProperty('--px');
+    stage.style.removeProperty('--py');
+  };
+}

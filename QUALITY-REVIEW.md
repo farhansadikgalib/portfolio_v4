@@ -24,7 +24,7 @@ Focused interaction checks also passed for both opening actions, all four projec
 
 The earlier full Chrome 153 regression suite covered:
 
-- Desktop scroll progression across all four projects and direct selector navigation.
+- Desktop scroll progression across all five projects and direct selector navigation.
 - Inactive scene visibility, inert controls, and focus handling.
 - Search, category filters, empty results, all 33 projects, and nested project dialogs.
 - Keyboard dismissal, focus restoration, and background scroll locking.
@@ -32,7 +32,7 @@ The earlier full Chrome 153 regression suite covered:
 - Live reduced-motion preference changes and static fallback at 1024×600.
 - Clipboard success and the unavailable-clipboard fallback.
 - Résumé response and package/contact link destinations.
-- JavaScript-disabled content and four featured store-link fallbacks.
+- JavaScript-disabled content and five featured store-link fallbacks.
 - Viewports at 320, 360, 390, 540, 541, 768, 800, 801, 1024, 1100, and 1440px.
 - Header collisions at 761, 768, 800, 801, 900, 1024, and 1100px.
 

@@ -91,34 +91,6 @@
       "value": "Sadik Galib."
     },
     {
-      "id": "home-text-4",
-      "section": "home",
-      "label": "Text · I build mobile apps that feel",
-      "type": "text",
-      "value": "I build mobile apps that feel"
-    },
-    {
-      "id": "home-text-5",
-      "section": "home",
-      "label": "Text · as good as they work.",
-      "type": "text",
-      "value": "as good as they work."
-    },
-    {
-      "id": "home-text-6",
-      "section": "home",
-      "label": "Text · Thoughtful interfaces. Reliable engineering.",
-      "type": "text",
-      "value": "Thoughtful interfaces. Reliable engineering."
-    },
-    {
-      "id": "home-text-7",
-      "section": "home",
-      "label": "Text · From the first idea to the everyday.",
-      "type": "text",
-      "value": "From the first idea to the everyday."
-    },
-    {
       "id": "home-text-8",
       "section": "home",
       "label": "Label · View selected work",
@@ -175,32 +147,11 @@
       "value": "iOS & Android"
     },
     {
-      "id": "home-text-16",
-      "section": "home",
-      "label": "Text · Designed for the everyday",
-      "type": "text",
-      "value": "Designed for the everyday"
-    },
-    {
       "id": "home-text-17",
       "section": "home",
       "label": "Text · ACI ECOLINK",
       "type": "text",
       "value": "ACI ECOLINK"
-    },
-    {
-      "id": "home-text-18",
-      "section": "home",
-      "label": "Text · ACI Quiz",
-      "type": "text",
-      "value": "ACI Quiz"
-    },
-    {
-      "id": "home-text-19",
-      "section": "home",
-      "label": "Text · A few screens. A lot of care.",
-      "type": "text",
-      "value": "A few screens. A lot of care."
     },
     {
       "id": "home-text-20",
@@ -224,21 +175,100 @@
       "value": "Available for hire"
     },
     {
+      "id": "home-text-23",
+      "section": "home",
+      "label": "Text · Currently",
+      "type": "text",
+      "value": "Currently"
+    },
+    {
+      "id": "home-text-24",
+      "section": "home",
+      "label": "Text · Senior Mobile Apps Developer",
+      "type": "text",
+      "value": "Senior Mobile Apps Developer"
+    },
+    {
+      "id": "home-text-25",
+      "section": "home",
+      "label": "Text · ACI Limited · leading Flutter architectu",
+      "type": "text",
+      "value": "ACI Limited · leading Flutter architecture across a diverse mobile portfolio"
+    },
+    {
+      "id": "home-text-26",
+      "section": "home",
+      "label": "Text · Previously Software Engineer at TechnoNe",
+      "type": "text",
+      "value": "Previously Software Engineer at TechnoNext, US-Bangla Group"
+    },
+    {
+      "id": "home-text-27",
+      "section": "home",
+      "label": "Text · Mobile apps built end to end,",
+      "type": "text",
+      "value": "Mobile apps built end to end,"
+    },
+    {
+      "id": "home-text-28",
+      "section": "home",
+      "label": "Text · from architecture to release.",
+      "type": "text",
+      "value": "from architecture to release."
+    },
+    {
+      "id": "home-text-29",
+      "section": "home",
+      "label": "Text · Six years of Flutter work across consume",
+      "type": "text",
+      "value": "Six years of Flutter work across consumer, travel, commerce, and B2B products."
+    },
+    {
+      "id": "home-text-30",
+      "section": "home",
+      "label": "Text · Clean architecture, careful QA, and rele",
+      "type": "text",
+      "value": "Clean architecture, careful QA, and releases on the Play Store, App Store, and ACI Store."
+    },
+    {
+      "id": "home-text-31",
+      "section": "home",
+      "label": "Text · Featured screens",
+      "type": "text",
+      "value": "Featured screens"
+    },
+    {
+      "id": "home-text-32",
+      "section": "home",
+      "label": "Text · Service requests, product catalogue, and",
+      "type": "text",
+      "value": "Service requests, product catalogue, and warranty tracking."
+    },
+    {
       "id": "home-image-1",
       "section": "home",
-      "label": "Primary app image",
+      "label": "Opening image · centre phone",
       "type": "image",
       "value": "assets/projects/aci-ecolink-screen-2.webp",
       "alt": "ACI ECOLINK dashboard, showing product service, warranty, and troubleshooting",
       "fit": "original"
     },
     {
-      "id": "home-image-2",
+      "id": "home-image-3",
       "section": "home",
-      "label": "Companion app image",
+      "label": "Opening image · left phone",
       "type": "image",
-      "value": "assets/projects/aci-quiz-screen-2.webp",
-      "alt": "ACI Quiz topic selection screen",
+      "value": "assets/projects/aci-ecolink-screen-3.webp",
+      "alt": "ACI ECOLINK product catalogue listing EcoFlow power stations",
+      "fit": "original"
+    },
+    {
+      "id": "home-image-4",
+      "section": "home",
+      "label": "Opening image · right phone",
+      "type": "image",
+      "value": "assets/projects/aci-ecolink-screen-4.webp",
+      "alt": "ACI ECOLINK request service screen for an EcoFlow River 2, showing serial number, purchase date, and warranty end",
       "fit": "original"
     },
     {
@@ -1026,6 +1056,13 @@
       "value": "Always becoming."
     },
     {
+      "id": "experience-text-44",
+      "section": "experience",
+      "label": "Text · Journey introduction",
+      "type": "text",
+      "value": "From an Android trainee to leading Flutter architecture. Every chapter taught me to build with a little more care."
+    },
+    {
       "id": "experience-text-4",
       "section": "experience",
       "label": "Text · May 2024 — Present",
@@ -1439,6 +1476,45 @@
       ]
     },
     {
+      "id": "medex",
+      "name": "MedEx",
+      "category": "Healthcare",
+      "description": "Bangladesh medicine index with brand and generic search, dosage, pharmacology, contraindications, and bilingual content.",
+      "descriptionVerified": true,
+      "featured": true,
+      "icon": "assets/projects/medex-icon.webp",
+      "screenshots": [
+        "assets/projects/medex-screen-1.webp",
+        "assets/projects/medex-screen-2.webp",
+        "assets/projects/medex-screen-3.webp"
+      ],
+      "links": {
+        "play": "https://play.google.com/store/apps/details?id=com.medex.bd.medex",
+        "appStore": "",
+        "aci": ""
+      },
+      "linkStatus": "available",
+      "linkStatuses": {
+        "play": "available"
+      },
+      "downloads": "500K+",
+      "downloadsSource": "Google Play",
+      "sourceDate": "21 September 2026",
+      "role": "Medicine-reference app engineering",
+      "roleSource": "farhan_resume.pdf",
+      "headline": "Clarity, when\nit matters.",
+      "summary": "A medicine reference for Bangladesh. Bringing detailed drug information, smart search, and bilingual content into a focused mobile experience.",
+      "features": [
+        "Medicine index",
+        "Smart search",
+        "Bilingual content"
+      ],
+      "preview": [
+        1,
+        2
+      ]
+    },
+    {
       "id": "firsttrip",
       "name": "FirstTrip",
       "category": "Travel",
@@ -1755,7 +1831,7 @@
       "category": "Public services",
       "description": "Bangladesh certificate-service app for applications, verification, payment, approval, and local-government certificate issuance.",
       "descriptionVerified": true,
-      "featured": false,
+      "featured": true,
       "icon": "assets/projects/prottoyon-icon.webp",
       "screenshots": [
         "assets/projects/prottoyon-screen-1.webp",
@@ -1776,47 +1852,12 @@
       "sourceDate": "21 September 2026",
       "role": "Contributed to government certification app",
       "roleSource": "farhan_resume.pdf",
-      "headline": "Prottoyon",
-      "summary": "Bangladesh certificate-service app for applications, verification, payment, approval, and local-government certificate issuance.",
-      "features": [],
-      "preview": [
-        1,
-        2
-      ]
-    },
-    {
-      "id": "medex",
-      "name": "MedEx",
-      "category": "Healthcare",
-      "description": "Bangladesh medicine index with brand and generic search, dosage, pharmacology, contraindications, and bilingual content.",
-      "descriptionVerified": true,
-      "featured": true,
-      "icon": "assets/projects/medex-icon.webp",
-      "screenshots": [
-        "assets/projects/medex-screen-1.webp",
-        "assets/projects/medex-screen-2.webp",
-        "assets/projects/medex-screen-3.webp"
-      ],
-      "links": {
-        "play": "https://play.google.com/store/apps/details?id=com.medex.bd.medex",
-        "appStore": "",
-        "aci": ""
-      },
-      "linkStatus": "available",
-      "linkStatuses": {
-        "play": "available"
-      },
-      "downloads": "500K+",
-      "downloadsSource": "Google Play",
-      "sourceDate": "21 September 2026",
-      "role": "Medicine-reference app engineering",
-      "roleSource": "farhan_resume.pdf",
-      "headline": "Clarity, when\nit matters.",
-      "summary": "A medicine reference for Bangladesh. Bringing detailed drug information, smart search, and bilingual content into a focused mobile experience.",
+      "headline": "Every certificate.\nOne address.",
+      "summary": "A digital front door to local-government certificates in Bangladesh. Apply online, verify your identity, pay, and receive approved certificates in one place.",
       "features": [
-        "Medicine index",
-        "Smart search",
-        "Bilingual content"
+        "Online applications",
+        "Identity verification",
+        "Certificate issuance"
       ],
       "preview": [
         1,

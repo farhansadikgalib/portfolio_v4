@@ -8,7 +8,7 @@ Sources reviewed: `README.md`, `farhan-sadik-galib.md`, and both pages and link 
 - The supplied 6+ years and 25+ shipped-app figures.
 - All five career roles and their exact source dates; both degrees.
 - All 33 project names and available store links, with searchable categories.
-- Four featured projects: Cartup, FirstTrip, YSpark, and MedEx. The résumé documents contributions to each.
+- Five featured projects, shown in this order: Cartup, MedEx, FirstTrip, YSpark, and Prottoyon. The résumé documents contributions to each. Each featured scene shows the Google Play download band from the project directory.
 - Local optimized copies of all 65 accessible image URLs supplied in the README.
 - LinkedIn, GitHub, and three pub.dev packages recovered from résumé links.
 - Global skills, training, and community activities.

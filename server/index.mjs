@@ -12,8 +12,8 @@ const COOKIE = 'portfolio_admin';
 const IDLE_MS = 30 * 60 * 1000;
 const ABSOLUTE_MS = 12 * 60 * 60 * 1000;
 const MAX_UPLOAD = 8 * 1024 * 1024;
-const PUBLIC_FILES = new Set(['index.html', 'styles.css', 'app.js', 'motion.js', 'cms.js', 'farhan_resume.pdf', 'data/projects.js', 'data/default-content.json']);
-const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.pdf': 'application/pdf' };
+const PUBLIC_FILES = new Set(['index.html', 'styles.css', 'app.js', 'motion.js', 'cms.js', 'cursor.js', 'farhan_resume.pdf', 'data/projects.js', 'data/default-content.json']);
+const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.pdf': 'application/pdf', '.woff2': 'font/woff2' };
 const mediaName = value => typeof value === 'string' ? value.replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, 140) : '';
 const tokenHash = value => createHash('sha256').update(value).digest('hex');
 const httpError = (status, message) => Object.assign(new Error(message), { status });
@@ -88,8 +88,19 @@ export async function createPortfolioServer({ rootDir = process.cwd(), dataDir =
     snapshot = { draft: seed, published: seed, revision: 1, publishedAt: now, updatedAt: now };
     await atomicJSON(contentFile, snapshot);
   } else {
-    snapshot.draft = validateDocument(snapshot.draft);
-    snapshot.published = validateDocument(snapshot.published);
+    // Keep saved content in step with the page: built-in fields added to the seed after
+    // first run are appended so the console can edit them, and fields the page no longer
+    // renders are dropped. Saved values of current fields are never overwritten.
+    const seed = validateDocument(JSON.parse(await readFile(join(rootDir, 'data/default-content.json'), 'utf8')));
+    const seedIds = new Set(seed.fields.map(field => field.id));
+    const withSeedFields = document => {
+      const known = new Set(document.fields.map(field => field.id));
+      const fields = [...document.fields.filter(field => seedIds.has(field.id)), ...seed.fields.filter(field => !known.has(field.id))];
+      const unchanged = fields.length === document.fields.length && fields.every((field, index) => field === document.fields[index]);
+      return unchanged ? document : { ...document, fields };
+    };
+    snapshot.draft = withSeedFields(validateDocument(snapshot.draft));
+    snapshot.published = withSeedFields(validateDocument(snapshot.published));
     if (!Number.isSafeInteger(snapshot.revision) || snapshot.revision < 1) throw new Error('Saved content revision is invalid.');
   }
   let uploaded = await readJSON(mediaFile, []);
