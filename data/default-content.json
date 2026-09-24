@@ -189,18 +189,11 @@
       "value": "Senior Mobile Apps Developer"
     },
     {
-      "id": "home-text-25",
+      "id": "home-text-33",
       "section": "home",
-      "label": "Text · ACI Limited · leading Flutter architectu",
+      "label": "Text · Current company",
       "type": "text",
-      "value": "ACI Limited · leading Flutter architecture across a diverse mobile portfolio"
-    },
-    {
-      "id": "home-text-26",
-      "section": "home",
-      "label": "Text · Previously Software Engineer at TechnoNe",
-      "type": "text",
-      "value": "Previously Software Engineer at TechnoNext, US-Bangla Group"
+      "value": "ACI Limited"
     },
     {
       "id": "home-text-27",
@@ -1014,6 +1007,146 @@
       "value": "pub.dev"
     },
     {
+      "id": "craft-text-67",
+      "section": "craft",
+      "label": "Heading · Background",
+      "type": "text",
+      "value": "Background"
+    },
+    {
+      "id": "craft-text-68",
+      "section": "craft",
+      "label": "Label · Photos or video behind any screen. Backgrounds for Flutter, made simpl",
+      "type": "text",
+      "value": "Photos or video behind any screen. Backgrounds for Flutter, made simple."
+    },
+    {
+      "id": "craft-text-69",
+      "section": "craft",
+      "label": "Label · Flutter package",
+      "type": "text",
+      "value": "Flutter package"
+    },
+    {
+      "id": "craft-text-70",
+      "section": "craft",
+      "label": "Label · pub.dev",
+      "type": "text",
+      "value": "pub.dev"
+    },
+    {
+      "id": "craft-text-71",
+      "section": "craft",
+      "label": "Heading · BD Map",
+      "type": "text",
+      "value": "BD Map"
+    },
+    {
+      "id": "craft-text-72",
+      "section": "craft",
+      "label": "Label · Bangladesh, division to union. Interactive drill-down maps with a geog",
+      "type": "text",
+      "value": "Bangladesh, division to union. Interactive drill-down maps with a geography API."
+    },
+    {
+      "id": "craft-text-73",
+      "section": "craft",
+      "label": "Label · Flutter package",
+      "type": "text",
+      "value": "Flutter package"
+    },
+    {
+      "id": "craft-text-74",
+      "section": "craft",
+      "label": "Label · pub.dev",
+      "type": "text",
+      "value": "pub.dev"
+    },
+    {
+      "id": "craft-text-75",
+      "section": "craft",
+      "label": "Heading · DatePicker Studio",
+      "type": "text",
+      "value": "DatePicker Studio"
+    },
+    {
+      "id": "craft-text-76",
+      "section": "craft",
+      "label": "Label · Single, range, birthday, or date-time. A themeable date picker toolkit",
+      "type": "text",
+      "value": "Single, range, birthday, or date-time. A themeable date picker toolkit."
+    },
+    {
+      "id": "craft-text-77",
+      "section": "craft",
+      "label": "Label · Flutter package",
+      "type": "text",
+      "value": "Flutter package"
+    },
+    {
+      "id": "craft-text-78",
+      "section": "craft",
+      "label": "Label · pub.dev",
+      "type": "text",
+      "value": "pub.dev"
+    },
+    {
+      "id": "craft-text-79",
+      "section": "craft",
+      "label": "Heading · MSSQL IO",
+      "type": "text",
+      "value": "MSSQL IO"
+    },
+    {
+      "id": "craft-text-80",
+      "section": "craft",
+      "label": "Label · Microsoft SQL Server from Flutter, over FFI and FreeTDS. Cross-platfor",
+      "type": "text",
+      "value": "Microsoft SQL Server from Flutter, over FFI and FreeTDS. Cross-platform."
+    },
+    {
+      "id": "craft-text-81",
+      "section": "craft",
+      "label": "Label · Flutter plugin",
+      "type": "text",
+      "value": "Flutter plugin"
+    },
+    {
+      "id": "craft-text-82",
+      "section": "craft",
+      "label": "Label · pub.dev",
+      "type": "text",
+      "value": "pub.dev"
+    },
+    {
+      "id": "craft-text-83",
+      "section": "craft",
+      "label": "Heading · Every package",
+      "type": "text",
+      "value": "Every package"
+    },
+    {
+      "id": "craft-text-84",
+      "section": "craft",
+      "label": "Label · All packages, one verified publisher. Browse the whole collection on p",
+      "type": "text",
+      "value": "All packages, one verified publisher. Browse the whole collection on pub.dev."
+    },
+    {
+      "id": "craft-text-85",
+      "section": "craft",
+      "label": "Label · Verified publisher",
+      "type": "text",
+      "value": "Verified publisher"
+    },
+    {
+      "id": "craft-text-86",
+      "section": "craft",
+      "label": "Label · pub.dev",
+      "type": "text",
+      "value": "pub.dev"
+    },
+    {
       "id": "craft-link-1",
       "section": "craft",
       "label": "Link · </>DropdownFlutterSearch, multi-select, and form validation. The ",
@@ -1033,6 +1166,41 @@
       "label": "Link · >_RiverFlow CLIScaffold with Riverpod, Clean Architecture, Freeze",
       "type": "url",
       "value": "https://pub.dev/packages/riverflow_cli"
+    },
+    {
+      "id": "craft-link-4",
+      "section": "craft",
+      "label": "Link · Background on pub.dev",
+      "type": "url",
+      "value": "https://pub.dev/packages/background"
+    },
+    {
+      "id": "craft-link-5",
+      "section": "craft",
+      "label": "Link · BD Map on pub.dev",
+      "type": "url",
+      "value": "https://pub.dev/packages/bd_map"
+    },
+    {
+      "id": "craft-link-6",
+      "section": "craft",
+      "label": "Link · DatePicker Studio on pub.dev",
+      "type": "url",
+      "value": "https://pub.dev/packages/datepicker_studio"
+    },
+    {
+      "id": "craft-link-7",
+      "section": "craft",
+      "label": "Link · MSSQL IO on pub.dev",
+      "type": "url",
+      "value": "https://pub.dev/packages/mssql_io"
+    },
+    {
+      "id": "craft-link-8",
+      "section": "craft",
+      "label": "Link · Every package on pub.dev",
+      "type": "url",
+      "value": "https://pub.dev/publishers/farhansadikgalib.com/packages"
     },
     {
       "id": "experience-text-1",
@@ -1490,12 +1658,13 @@
       ],
       "links": {
         "play": "https://play.google.com/store/apps/details?id=com.medex.bd.medex",
-        "appStore": "",
+        "appStore": "https://apps.apple.com/app/id6692613637",
         "aci": ""
       },
       "linkStatus": "available",
       "linkStatuses": {
-        "play": "available"
+        "play": "available",
+        "appStore": "available"
       },
       "downloads": "500K+",
       "downloadsSource": "Google Play",

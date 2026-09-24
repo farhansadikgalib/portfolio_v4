@@ -50,12 +50,13 @@ export const projects = [
     ],
     "links": {
       "play": "https://play.google.com/store/apps/details?id=com.medex.bd.medex",
-      "appStore": "",
+      "appStore": "https://apps.apple.com/app/id6692613637",
       "aci": ""
     },
     "linkStatus": "available",
     "linkStatuses": {
-      "play": "available"
+      "play": "available",
+      "appStore": "available"
     },
     "downloads": "500K+",
     "downloadsSource": "Google Play",

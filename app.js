@@ -243,6 +243,10 @@ document.addEventListener('keydown', event => {
 document.addEventListener('click', event => {
   if (!mobileNav.hidden && !event.target.closest('.site-header')) closeMenu();
 });
+// Keyboard users tabbing past the menu should not land behind it.
+document.querySelector('.site-header').addEventListener('focusout', event => {
+  if (!mobileNav.hidden && event.relatedTarget && !event.relatedTarget.closest('.site-header')) closeMenu();
+});
 matchMedia('(min-width: 761px)').addEventListener('change', event => { if (event.matches) closeMenu(); });
 
 let toastTimer;
